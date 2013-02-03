@@ -58,9 +58,9 @@ manchu.build([
 
 ## public api
 
-### manchu.Directive(options)
+### manchu.createDirective(options)
 
-Contructor for creating `Directive` instances. The argument `options` takes the following properties.
+Returns a new `Directive` instance. The argument `options` takes the following properties.
 
 * **type** - *String* ('handlebars', 'javascript', 'stylesheet')
 	* Type will determine whether to precompile handlebars templates, uglify JavaScript files, or compile LESS
