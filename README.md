@@ -47,12 +47,38 @@ manchu.build([
 	templates,
 	styles,
 	scripts
-], function(err) {
+], function() {
 	// start your server or something
 });
 ```
+
+## public api
+
+### manchu.Directive(options)
+
+Contructor for creating `Directive` instances. The argument `options` takes the following properties.
+
+* **type** - *String* ('handlebars', 'javascript', 'stylesheet')
+	* Type will determine whether to precompile handlebars templates, uglify JavaScript files, or compile LESS
+* **input** - *String* or *Array*
+	* This can be a string path to a directory of files to use or and array of individual files or directories
+	* The directory read is not recursive and will only read the immediate children of the directory
+* **output** - *String*
+	* Path to the desired output file.
+
+### manchu.build(directives, callback)
+
+Accepts an array of `Directive`s and executes them in sequence.
+
+* **directives** - *Array*
+	* Pass an array of `manchu.Directive` instances
+* **callback** - *Function*
+	* Gets called upon successful build of all directives
+
+Returns a new instance
+
 ## class reference
 
-### manchu.builder
+### manchu.Builder
 
-### manchu.directive
+### manchu.Directive

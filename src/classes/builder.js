@@ -24,6 +24,11 @@ Builder = function(directives, callback) {
 Builder.prototype.exec = function(noExec) {
 	var builder = this
 	  , directive = builder.directives[builder.current];
+
+	if (!(directive instanceof Directive)) {
+		throw new Error(error('Object "' + directive + '" not a valid manchu.Directive.'));
+	}
+
 	if (builder.current <= builder.directives.length) {
 		var command = createCommand(directive);
 		console.log(notice('Manchu: Executing directive:'));
