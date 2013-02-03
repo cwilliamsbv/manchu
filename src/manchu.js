@@ -12,8 +12,8 @@ var Directive = require('./classes/directive.js')
  };
 
 // run a consecutive sequence of Directives using a Builder
- module.exports.build = function(directives, callback) {
+ module.exports.build = function(directives, callback, noExec) {
  	var builder = new Builder(directives, callback);
- 	builder.exec();
+ 	builder.exec(noExec);
  	return builder;
  };

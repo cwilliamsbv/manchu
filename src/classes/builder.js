@@ -21,23 +21,26 @@ Builder = function(directives, callback) {
 	this.current = 0;
 };
 
-Builder.prototype.exec = function(onComplete) {
+Builder.prototype.exec = function(noExec) {
 	var builder = this
 	  , directive = builder.directives[builder.current];
 	if (builder.current <= builder.directives.length) {
 		var command = createCommand(directive);
-		console.log(notice('Manchu: Executing directive: '), command);
-		exec(command, function(err, stdout, stderr) {
-			if (!err && !stderr) {
-				builder.current++;
-				builder.exec(onComplete);
-			} else {
-				console(error(err || stderr));
-			}
-		});
+		console.log(notice('Manchu: Executing directive:'));
+		console.log(command);
+		if (!noExec) {
+			exec(command, function(err, stdout, stderr) {
+				if (!err && !stderr) {
+					builder.current++;
+					builder.exec(onComplete);
+				} else {
+					console.log(error(err || stderr));
+				}
+			});
+		}
 	} else {
 		builder.current = 0;
-		onComplete.call(this);
+		this.onComplete.call(this);
 	}
 };
 
