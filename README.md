@@ -28,22 +28,19 @@ var manchu = require('manchu')
 templates = manchu.createDirective({
 	type : 'handlebars',
 	input : __dirname + '/templates',
-	output : __dirname + '/public/scripts/templates.js',
-	minify : true // default
+	output : __dirname + '/public/scripts/templates.js'
 });
 
 scripts = manchu.createDirective({
 	type : 'javascript',
 	input : __dirname + '/scripts',
-	output : __dirname + '/public/scripts/app.js',
-	minify : true // default
+	output : __dirname + '/public/scripts/app.js'
 });
 
 styles = manchu.createDirective({
 	type : 'stylesheet',
 	input : __dirname + '/styles',
-	output : __dirname + '/public/styles/styles.css',
-	minify : true // default
+	output : __dirname + '/public/styles/styles.css'
 });
 
 manchu.build([
