@@ -11,6 +11,10 @@ manchu is an easy way to create build directives at your application runtime. it
 * css/less concatenation and compilation
 * javascript compression and concatenation
 
+## installation
+
+	$ npm install manchu
+
 ## usage
 
 this example illustrates how you might do the following:
