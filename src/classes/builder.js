@@ -37,7 +37,7 @@ Builder.prototype.exec = function(noExec) {
 			exec(command, function(err, stdout, stderr) {
 				if (!err && !stderr) {
 					builder.current++;
-					builder.exec(onComplete);
+					builder.exec(builder.onComplete);
 				} else {
 					console.log(error(err || stderr));
 				}
