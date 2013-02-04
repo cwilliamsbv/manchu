@@ -30,13 +30,14 @@ Builder.prototype.exec = function(noExec) {
 		console.log(notice('Manchu: Executing directive:'));
 		console.log(command);
 		if (!noExec) {
-			exec(command, function(err, stdout, stderr) {
-				if (!err && !stderr) {
-					builder.current++;
-					builder.exec(builder.onComplete);
-				} else {
-					console.log(error(err || stderr));
-				}
+			var proc = exec(command);
+			proc.on('close', function() {
+				console.log(warn('Directive complete!'));
+				builder.current++;
+				builder.exec();
+			});
+			proc.on('error', function(err) {
+				console.log(error(err));
 			});
 		}
 	} else {
