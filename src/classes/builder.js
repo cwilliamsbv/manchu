@@ -25,7 +25,7 @@ Builder.prototype.exec = function(noExec) {
 	var builder = this
 	  , directive = builder.directives[builder.current];
 
-	if (builder.current <= builder.directives.length) {
+	if (builder.current < builder.directives.length) {
 		var command = createCommand(directive);
 		console.log(notice('Manchu: Executing directive:'));
 		console.log(command);
