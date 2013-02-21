@@ -1,7 +1,7 @@
 {
 	"name" : "manchu",
 	"preferGlobal" : false,
-	"version" : "0.1.6",
+	"version" : "0.1.7",
 	"author" : "Gordon Hall <gordon@gordonwritescode.com>",
 	"description" : "carefree handlebars template pre-compilation at runtime",
 	"contributors" : [],

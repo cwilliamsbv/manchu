@@ -7,9 +7,6 @@ var path = require('path')
   , fs = require('fs')
   , clc = require('cli-color')
   , exec = require('child_process').exec
-  , error = clc.red.bold
-  , warn = clc.yellow
-  , notice = clc.blue
   , bin = __dirname + '/../../node_modules/.bin/'
   , createCommand
   , Directive = require('./directive.js')
@@ -27,17 +24,33 @@ Builder.prototype.exec = function(noExec) {
 
 	if (builder.current < builder.directives.length) {
 		var command = createCommand(directive);
-		console.log(notice('Manchu: Executing directive:'));
-		console.log(command);
+		
+		console.log(
+			clc.magenta.bold('Manchu:'),
+			clc.white('building "'),
+			clc.whiteBright.bold(directive.name),
+		//	clc.white('" of type "'),
+		//	clc.whiteBright.bold(directive.type),
+			clc.white('" to file "'),
+			clc.whiteBright.bold(directive.output),
+			clc.white('"')
+		);
+		
 		if (!noExec) {
-			var proc = exec(command);
+			var proc = exec(command, function(err, stdout, stderr) {
+				if (err || stderr) {
+					console.log(clc.red.bold(err || stderr));
+					console.log(
+						clc.magenta.bold('Manchu:'),
+						clc.white('build failed - terminating process')
+					);
+					process.exit();
+				}
+			});
+
 			proc.on('close', function() {
-				console.log(warn('Directive complete!'));
 				builder.current++;
 				builder.exec();
-			});
-			proc.on('error', function(err) {
-				console.log(error(err));
 			});
 		}
 	} else {

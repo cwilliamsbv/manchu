@@ -55,6 +55,7 @@ Directive = function(options) {
 
 	// set options
 	this.type = options.type;
+	this.name = options.name || 'unknown';
 	this.input = inputs;
 	this.output = path.normalize(options.output);
 	this.minify = Boolean(options.minify);
