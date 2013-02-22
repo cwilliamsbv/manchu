@@ -14,7 +14,7 @@ var path = require('path')
 
 Builder = function(directives, callback) {
 	this.directives = directives;
-	this.onComplete = callback;
+	this.onComplete = callback || new Function();
 	this.current = 0;
 };
 
@@ -29,8 +29,6 @@ Builder.prototype.exec = function(noExec) {
 			clc.magenta.bold('Manchu:'),
 			clc.white('building "'),
 			clc.whiteBright.bold(directive.name),
-		//	clc.white('" of type "'),
-		//	clc.whiteBright.bold(directive.type),
 			clc.white('" to file "'),
 			clc.whiteBright.bold(directive.output),
 			clc.white('"')
@@ -55,6 +53,10 @@ Builder.prototype.exec = function(noExec) {
 		}
 	} else {
 		builder.current = 0;
+		console.log(
+			clc.magenta.bold('Manchu:'),
+			clc.white('builder executed all directives successfully')
+		);
 		this.onComplete.call(this);
 	}
 };

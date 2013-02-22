@@ -20,13 +20,24 @@ module.exports.build = function(directives, callback, noExec) {
 	return builder;
 };
 
-function printInfo() {
-	console.log(clc.magenta.bold('                         _           '));
-	console.log(clc.white.bold('  /\\/\\   __ _ _ __   ___| |__  _   _ '));
-	console.log(clc.magenta.bold(' /    \\ / _` | \'_ \\ / __| \'_ \\| | | |'));
-	console.log(clc.white.bold('/ /\\/\\ \\ (_| | | | | (__| | | | |_| |'));
-	console.log(clc.magenta.bold('\\/    \\/\\__,_|_| |_|\\___|_| |_|\\__,_|'));
-	console.log('');
-	console.log(clc.magenta.bold('Author:'), clc.white('Gordon Hall <gordon@gordonwritescode.com>'));
-	console.log('');                       
+function printInfo(big) {
+	console.log(clc.white('---------------------------------------'));	
+	if (big) {
+		console.log(clc.magenta.bold('                         _           '));
+		console.log(clc.white.bold('  /\\/\\   __ _ _ __   ___| |__  _   _ '));
+		console.log(clc.magenta.bold(' /    \\ / _` | \'_ \\ / __| \'_ \\| | | |'));
+		console.log(clc.white.bold('/ /\\/\\ \\ (_| | | | | (__| | | | |_| |'));
+		console.log(clc.magenta.bold('\\/    \\/\\__,_|_| |_|\\___|_| |_|\\__,_|')); 
+	} else {
+		console.log(
+			clc.magenta.bold('|\\/|'),
+			clc.white.bold('/\\'),
+			clc.magenta.bold('|\\|'),
+			clc.white.bold('('),
+			clc.magenta.bold('|-|'),
+			clc.white.bold('|_|')
+		);
+	}     
+	console.log(clc.magenta('Author:'), clc.white('Gordon Hall <gordon@gordonwritescode.com>'));
+	console.log(clc.white('---------------------------------------'));			                
 };
