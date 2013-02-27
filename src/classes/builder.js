@@ -43,6 +43,10 @@ Builder.prototype.exec = function(noExec) {
 						clc.white('build failed - terminating process')
 					);
 					process.exit();
+				} else {
+					if (directive.type === 'stylesheet') {
+						fs.writeFileSync(directive.output, stdout);
+					}
 				}
 			});
 
@@ -86,7 +90,7 @@ createCommand = function(directive) {
 	command += cmd[directive.type];
 	command += directive.flags.join(' ') + ' ';
 	command += inputs.join(' ') + ' ';
-	command += (directive.type === 'stylesheet') ? ' ' : '--output ' + directive.output;
+	command += (directive.type === 'stylesheet') ? ' --compress ' : '--output ' + directive.output;
 
 	return command;
 };
