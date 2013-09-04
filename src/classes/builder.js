@@ -42,7 +42,7 @@ Builder.prototype.exec = function(noExec) {
 						clc.magenta.bold('Manchu:'),
 						clc.white('build failed - terminating process')
 					);
-					process.exit();
+					builder.onComplete.call(this, err || stderr);
 				} else {
 					if (directive.type === 'stylesheet') {
 						fs.writeFileSync(directive.output, stdout);

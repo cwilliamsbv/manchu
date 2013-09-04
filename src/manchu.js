@@ -14,14 +14,13 @@ module.exports.createDirective = function(options) {
 
 // run a consecutive sequence of Directives using a Builder
 module.exports.build = function(directives, callback, noExec) {
-	printInfo();
+//	printInfo();
 	var builder = new Builder(directives, callback);
 	builder.exec(noExec);
 	return builder;
 };
 
 function printInfo(big) {
-	console.log(clc.white('---------------------------------------'));	
 	if (big) {
 		console.log(clc.magenta.bold('                         _           '));
 		console.log(clc.white.bold('  /\\/\\   __ _ _ __   ___| |__  _   _ '));
@@ -37,7 +36,5 @@ function printInfo(big) {
 			clc.magenta.bold('|-|'),
 			clc.white.bold('|_|')
 		);
-	}     
-	console.log(clc.magenta('Author:'), clc.white('Gordon Hall <gordon@gordonwritescode.com>'));
-	console.log(clc.white('---------------------------------------'));			                
+	}     		                
 };
