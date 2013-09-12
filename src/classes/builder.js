@@ -7,7 +7,7 @@ var path = require('path')
   , fs = require('fs')
   , clc = require('cli-color')
   , exec = require('child_process').exec
-  , bin = __dirname + '/../../node_modules/.bin/'
+  , bin = path.join(__dirname, '..', '..', 'node_modules', '.bin')
   , createCommand
   , Directive = require('./directive.js')
   , Builder;
@@ -33,7 +33,7 @@ Builder.prototype.exec = function(noExec) {
 			clc.whiteBright.bold(directive.output),
 			clc.white('"')
 		);
-		
+
 		if (!noExec) {
 			var proc = exec(command, function(err, stdout, stderr) {
 				if (err || stderr) {
@@ -67,19 +67,19 @@ Builder.prototype.exec = function(noExec) {
 
 createCommand = function(directive) {
 	var cmd = {
-		handlebars : bin + 'handlebars ',
-		stylesheet : bin + 'lessc ',
-		javascript : bin + 'uglifyjs '
+		handlebars : path.join(bin, 'handlebars '),
+		stylesheet : path.join(bin, 'lessc '),
+		javascript : path.join(bin, 'uglifyjs ')
 	} , command = '', inputs = [];
 
 	directive.input.forEach(function(val, index) {
 		if (val.isDirectory) {
 			var contents = fs.readdirSync(val.path)
-			  , basePath = val.path;
+			  , basePath = path.normalize(val.path);
 			// iterate over dir contents
 			contents.forEach(function(val, index) {
-				if (fs.statSync(basePath + '/' + val).isFile()) {
-					inputs.push(basePath + '/' + val);
+				if (fs.statSync(path.join(basePath, val)).isFile()) {
+					inputs.push(path.join(basePath, val));
 				}
 			});
 		} else {
